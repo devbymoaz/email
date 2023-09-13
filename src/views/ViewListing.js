@@ -132,48 +132,49 @@ function ViewListing() {
                                     {listning.price}
                                 </Typography>
                                 <Divider />
-                                <box sx={{ display: 'flex', bg: 'red' }}>
-                                    <Button
-                                        justifyContent="center"
-                                        alignItems="center"
-                                        sx={{
-                                            mt: 6,
-                                            px: 4,
+                                <Box>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "column" }} >
+                                        <Button
+                                            justifyContent="center"
+                                            alignItems="center"
+                                            sx={{
+                                                mt: 6,
+                                                px: 4,
 
-                                            // paddingright: theme.spacing(4),
-                                            // paddingleft: theme.spacing(4),
-                                            borderRadius: theme.spacing(3),
-                                            background: theme.palette.secondary.third
-                                        }} variant="contained"
+                                                // paddingright: theme.spacing(4),
+                                                // paddingleft: theme.spacing(4),
+                                                borderRadius: theme.spacing(3),
+                                                background: theme.palette.secondary.third
+                                            }} variant="contained"
 
-                                    >Contact Seller</Button>
-                                    <br />
-                                    <Button
-                                        sx={{
-                                            mt: 4,
-                                            px: 4,
-                                            // padding: theme.spacing(1),
-                                            borderRadius: theme.spacing(3),
+                                        >Contact Seller</Button>
+                                        {/* <br /> */}
+                                        <Button
+                                            sx={{
+                                                mt: 4,
+                                                px: 4,
+                                                // padding: theme.spacing(1),
+                                                borderRadius: theme.spacing(3),
 
-                                        }} variant="outlined"
+                                            }} variant="outlined"
 
-                                    >Make Offer</Button>
-                                    <br />
-                                    <Button
+                                        >Make Offer</Button>
+                                        {/* <br /> */}
+                                        <Button
 
-                                        sx={{
-                                            mt: 4,
-                                            px: 4,
+                                            sx={{
+                                                mt: 4,
+                                                px: 4,
 
-                                            // padding: theme.spacing(1),
-                                            borderRadius: theme.spacing(3),
-                                            // background: theme.palette.secondary.main
-                                        }} variant="outlined"
-                                        startIcon={<RemoveRedEyeIcon />}
+                                                // padding: theme.spacing(1),
+                                                borderRadius: theme.spacing(3),
+                                                // background: theme.palette.secondary.main
+                                            }} variant="outlined"
+                                            startIcon={<RemoveRedEyeIcon />}
 
-                                    >Watch</Button>
-                                </box>
-
+                                        >Watch</Button>
+                                    </Box>
+                                </Box>
                             </CardContent>
                         </CardActionArea>
                     </Card>

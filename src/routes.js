@@ -7,6 +7,9 @@ import SignUp from "./views/SignUp";
 import AdminLogin from "./views/Admin/Auth/AdminLogin";
 import ErrorPage from "./components/ErrorBoundary/components/ErrorPage";
 import ViewListing from "./views/ViewListing";
+import Register from "./views/Register";
+import Loogin from "./views/Loogin";
+// import Register from "./components/AppBar/Register";
 
 export default function Router() {
     let element = useRoutes([
@@ -37,6 +40,14 @@ export default function Router() {
         {
             path: 'view-listning',
             element: <ViewListing />
+        },
+        {
+            path: '/register',
+            element: <Register />
+        },
+        {
+            path: '/login',
+            element: <Loogin />
         }
     ]);
     return element;

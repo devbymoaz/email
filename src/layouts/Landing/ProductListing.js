@@ -3,6 +3,7 @@ import React from 'react';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate, Link } from 'react-router-dom';
+import { Directions } from '@mui/icons-material';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     padding: theme.spacing(3),
@@ -39,6 +40,7 @@ const data = [
 const ProductListing = () => {
     const navigate = useNavigate();
     const handleViewListniong = (listning) => {
+
         navigate('/view-listning', { state: { listning } });
     };
     return (
@@ -74,8 +76,13 @@ const ProductListing = () => {
                                                         <FiberManualRecordIcon sx={{ ml: 1, height: '20px', color: '#2DC799' }} />
                                                         <Typography fontWeight="bold" sx={{ color: '#828282' }}> New Listing</Typography>
                                                     </Box>
-                                                    <Box>
+                                                    <Box sx={{
+                                                        display: 'flex',
+                                                        // flexDirection: 'row',
+                                                        // flexWrap: 'wrap'
+                                                    }}>
                                                         <StyledButton
+
                                                             onClick={() => handleViewListniong(val)}
                                                             endIcon={<ArrowForwardIcon />}
                                                         >
@@ -157,10 +164,10 @@ const ProductListing = () => {
                             </Grid>
                         );
 
-                        
+
                     })
                 }
-            </Grid>
+            </Grid >
             <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
                 <StyledButton2 variant='contained'
                     endIcon={<ArrowForwardIcon />}
@@ -168,7 +175,7 @@ const ProductListing = () => {
                     View All Listing
                 </StyledButton2>
             </Box>
-        </div>
+        </div >
     );
 };
 

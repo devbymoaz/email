@@ -15,5 +15,13 @@ export const theme = createTheme({
   typography: {
     fontSize: 15,
   },
+  // breakpoints: {
+  //   values: {
+  //     mobile: 0,
+  //     tablet: 640,
+  //     laptop: 1024,
+  //     desktop: 1235,
+  //   },
+  // },
 
 });

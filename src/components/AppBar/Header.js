@@ -1,9 +1,10 @@
-import { AppBar, Toolbar, Box, Typography, TextField, styled, InputAdornment, Button } from '@mui/material';
-import React from 'react';
+import { AppBar, Toolbar, Box, Typography, TextField, styled, InputAdornment, Button, useTheme, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import React, { useState } from 'react';
 import NavBarLinks from '../../layouts/Landing/NavBarLinks';
 import SearchIcon from '@mui/icons-material/Search';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
 import { KeyboardArrowDown } from '@mui/icons-material';
 const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -41,6 +42,14 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 
 const Header = () => {
   const [isAppBarFixed, setIsAppBarFixed] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileopen] = useState(false);
+  const theme = useTheme();
+  const handleMobileMenuOpen = () => {
+    setIsMobileopen(true);
+  };
+  const handleMobileMenuClose = () => {
+    setIsMobileopen(false);
+  };
   React.useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -84,26 +93,34 @@ const Header = () => {
         }}
       >
         <Toolbar>
-          <Typography>
+          <Typography >
             Company Logo
           </Typography>
-          <StyledTextField size='small'
-            autoComplete='off'
-            placeholder='Search by name'
-            label="Search Product"
-            sx={{ ml: 3, width: '400px' }}
-            InputProps={{
-              style: {
-                borderRadius: '20px',
-              },
-              endAdornment: (
-                <InputAdornment position="end">
-                  <SearchIcon sx={{ color: '#fff' }} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Box sx={{ ml: 5 }}>
+          <Box sx={{ ml: 4 }}>
+            <StyledTextField size='small'
+              autoComplete='off'
+              placeholder='Search by name'
+              label="Search Product"
+              sx={{ ml: 2, width: '250px' }}
+              InputProps={{
+                style: {
+                  borderRadius: '20px',
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SearchIcon sx={{ color: '#fff' }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            ml: 10, width: '350px', [theme.breakpoints.down('lg')]: {
+              display: 'none'
+            }
+          }}>
             <Button
               sx={{ color: '#fff', textTransform: 'none', fontSize: '1.05rem' }}
               id="basic-button"
@@ -218,13 +235,44 @@ const Header = () => {
               FAQ
             </Button>
           </Box>
+          <IconButton
+            color='inherit'
+            aria-label="Open mobile menu"
+            onClick={handleMobileMenuOpen}
+            sx={{
+              display: { lg: 'none' }
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer
+            anchor='right'
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+          >
+            <List>
+
+              <ListItem button onClick={handleMobileMenuClose}>
+
+                <ListItemText primary="Services" />
+              </ListItem>
+              <ListItem button onClick={handleMobileMenuClose}>
+                {/* <ListItemText primary="Sell Product" /> */}
+              </ListItem>
+              <ListItem button onClick={handleMobileMenuClose}>
+                {/* <ListItemText primary="Products Available" /> */}
+              </ListItem>
+              {/* ...additional mobile items */}
+            </List>
+
+          </Drawer>
           <Box sx={{ ml: 12 }}>
             <NavBarLinks />
           </Box>
         </Toolbar>
       </AppBar>
 
-    </div>
+    </div >
   );
 };
 
