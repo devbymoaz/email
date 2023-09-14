@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/AppBar/Header';
 import Footer from '../layouts/Landing/Footer';
 import Page from '../components/page/page';
@@ -15,6 +15,10 @@ function ViewListing() {
     const location = useLocation();
     const { listning } = location.state;
     const theme = useTheme();
+    useEffect(() => {
+        // Scroll to the top of the page when the component mounts
+        window.scrollTo(0, 0);
+    }, []);
     return (
 
         <>

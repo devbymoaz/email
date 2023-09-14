@@ -30,7 +30,7 @@ const StyledButton2 = styled(Button)(({ theme }) => ({
     }
 }));
 const data = [
-    { id: 1, title: 'Electronics, Equipment', price: '$4,229,274.00', mp: '$100,697.00', rev: '$468,513.00', mon: 'Amazon, FBA', created: 2020, pic: '/assets/images/electronic.jpg' },
+    { id: 1, title: 'Electronics, Equipment', price: '$4,229,4.00', mp: '$100,697.00', rev: '$468,513.00', mon: 'Amazon, FBA', created: 2020, pic: '/assets/images/electronic.jpg' },
     { id: 2, title: 'Clothing, Apparel', price: '$2,569,981.00', mp: '$87,345.00', rev: '$325,768.00', mon: 'Etsy', created: 2019, pic: '/assets/images/clothing.jpg' },
     { id: 3, title: 'Home, Furniture', price: '$3,865,129.00', mp: '$125,679.00', rev: '$543,987.00', mon: 'eBay', created: 2021, pic: '/assets/images/furniture.jpeg' },
     { id: 4, title: 'Books, Literature', price: '$1,765,342.00', mp: '$57,893.00', rev: '$236,765.00', mon: 'Amazon, Kindle', created: 2018, pic: '/assets/images/books.webp' },
@@ -61,14 +61,14 @@ const ProductListing = () => {
                                         <Box flex={1}
                                             component="img"
                                             src={val.pic}
-                                            sx={{ height: '190px', width: '20%' }}
+                                            sx={{ height: '230px', width: '25%' }}
                                         >
                                         </Box>
                                         <Box flex={5}>
                                             <Stack>
                                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                                     <Box sx={{ display: 'flex' }}>
-                                                        <Box sx={{ background: '#2DC799', padding: '0px 10px', height: '25px' }}>
+                                                        <Box sx={{ background: '#2DC799', padding: '0px 20px', height: '30px', margin: '0px 10px' }}>
                                                             <Typography sx={{ fontSize: '15px', fontWeight: 'bold', color: '#fff' }}>
                                                                 #7102356
                                                             </Typography>

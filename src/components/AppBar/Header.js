@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Box, Typography, TextField, styled, InputAdornment, Button, useTheme, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Toolbar, Box, Typography, TextField, styled, InputAdornment, Button, useTheme, IconButton, Drawer, List, ListItem, ListItemText, Divider } from '@mui/material';
 import React, { useState } from 'react';
 import NavBarLinks from '../../layouts/Landing/NavBarLinks';
 import SearchIcon from '@mui/icons-material/Search';
@@ -41,11 +41,20 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const Header = () => {
+
+  const dividerStyle = {
+    borderRight: '1px solid #FFFFFF',
+    height: '30px',
+    margin: '0 10px',
+  };
+  // const isSmallScreen = theme.breakpoints.down('sm');
   const [isAppBarFixed, setIsAppBarFixed] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileopen] = useState(false);
   const theme = useTheme();
-  const handleMobileMenuOpen = () => {
-    setIsMobileopen(true);
+  const isSmallScreen = theme.breakpoints.down('sm');
+  const handleMobileMenuOpen = (event) => {
+    event.stopPropagation();
+    setIsMobileopen(!isMobileMenuOpen);
   };
   const handleMobileMenuClose = () => {
     setIsMobileopen(false);
@@ -58,6 +67,7 @@ const Header = () => {
         setIsAppBarFixed(false);
       }
     };
+
 
     window.addEventListener('scroll', handleScroll);
 
@@ -84,6 +94,7 @@ const Header = () => {
       <AppBar
         sx={{
           pl: 10,
+          ml: 'auto',
           // pr: 10,
           position: 'static',
           top: 0,
@@ -93,15 +104,55 @@ const Header = () => {
         }}
       >
         <Toolbar>
-          <Typography >
-            Company Logo
-          </Typography>
-          <Box sx={{ ml: 4 }}>
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+
+            [theme.breakpoints.down('md')]: {
+              justifyContent: 'flex-start',
+              marginLeft: '-50px',
+            },
+            [theme.breakpoints.down('sm')]: {
+              display: 'flex',
+              justifyContent: 'flex-start',
+
+
+            }
+          }}>
+            <Typography sx={{ fontSize: '0.7rem' }} >
+              Company Logo
+            </Typography>
+          </Box>
+          <Box sx={{
+            ml: 4,
+            [theme.breakpoints.down('lg')]: {
+              ml: 'auto',
+
+            },
+
+          }}>
             <StyledTextField size='small'
               autoComplete='off'
               placeholder='Search by name'
-              label="Search Product"
-              sx={{ ml: 2, width: '250px' }}
+              label="Search"
+              sx={{
+                ml: 2, width: '250px',
+                [theme.breakpoints.down('lg')]: {
+                  ml: 'auto',
+                  width: '300px'
+                },
+                [theme.breakpoints.down('md')]: {
+                  ml: 'auto',
+                  width: '200px'
+                },
+                [theme.breakpoints.down('sm')]: {
+                  // overflow: 'hidden',
+                  width: '150px',
+                  mr: '50px'
+                },
+
+
+              }}
               InputProps={{
                 style: {
                   borderRadius: '20px',
@@ -117,7 +168,8 @@ const Header = () => {
           <Box sx={{
             display: 'flex',
             flexDirection: 'row',
-            ml: 10, width: '350px', [theme.breakpoints.down('lg')]: {
+            flexShrink: true,
+            ml: 3, width: '350px', [theme.breakpoints.down('lg')]: {
               display: 'none'
             }
           }}>
@@ -169,7 +221,7 @@ const Header = () => {
                 }}
               >Products Available</MenuItem>
             </Menu>
-            |
+            <div style={dividerStyle}></div>
             <Button sx={{
               color: '#fff',
               textTransform: 'none',
@@ -177,7 +229,7 @@ const Header = () => {
             }}>
               Blog
             </Button>
-            |
+            <div style={dividerStyle}></div>
             <Button
               sx={{ color: '#fff', textTransform: 'none', fontSize: '1.05rem' }}
               id="basic-button"
@@ -226,7 +278,7 @@ const Header = () => {
                 }}
               >Help</MenuItem>
             </Menu>
-            |
+            <div style={dividerStyle}></div>
             <Button sx={{
               color: '#fff',
               textTransform: 'none',
@@ -235,38 +287,117 @@ const Header = () => {
               FAQ
             </Button>
           </Box>
-          <IconButton
-            color='inherit'
-            aria-label="Open mobile menu"
-            onClick={handleMobileMenuOpen}
+          {isSmallScreen && (
+            <IconButton
+              color="inherit"
+              aria-label="Open mobile menu"
+              onClick={handleMobileMenuOpen}
+              sx={{
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+
+                transform: 'translateY(-50%)',
+                display: { lg: 'none' },
+
+
+
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Box
             sx={{
-              display: { lg: 'none' }
+              [theme.breakpoints.down('sm')]: {
+                textAlign: 'left',
+              },
+              [theme.breakpoints.up('sm')]: {
+                textAlign: 'right',
+              },
             }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Drawer
-            anchor='right'
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-          >
-            <List>
+            <Drawer
+              anchor='right'
+              open={isMobileMenuOpen}
+              onClose={handleMobileMenuClose}
 
-              <ListItem button onClick={handleMobileMenuClose}>
+            >
+              <List
+                sx={{
+                  maxHeight: 'calc(100vh - 64px)', // Adjust the height as needed
+                  overflowY: 'auto',
+                }}>
+                <ListItem button onClick={handleMobileMenuClose}>
+                  <ListItemText primary="Services" />
+                </ListItem>
+                <ListItem button onClick={handleMobileMenuClose}>
+                  <ListItemText primary="Blog" />
+                </ListItem>
+                <ListItem button onClick={handleMobileMenuClose}>
+                  <ListItemText primary="About" />
+                </ListItem>
+                {/* Submenu items for Services */}
+                <ListItem
+                  button
+                  onClick={handleMobileMenuClose}
+                  sx={{ pl: 2 }} // Add left padding to indent subheadings
+                >
+                  <ListItemText primary="Buy Product" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={handleMobileMenuClose}
+                  sx={{ pl: 2 }} // Add left padding to indent subheadings
+                >
+                  <ListItemText primary="Sell Product" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={handleMobileMenuClose}
+                  sx={{ pl: 2 }} // Add left padding to indent subheadings
+                >
+                  <ListItemText primary="Products Available" />
+                </ListItem>
+                {/* Divider to separate Services and About subheadings */}
+                <Divider />
+                {/* Submenu items for About */}
+                <ListItem
+                  button
+                  onClick={handleMobileMenuClose}
+                  sx={{ pl: 2 }} // Add left padding to indent subheadings
+                >
+                  <ListItemText primary="About Us" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={handleMobileMenuClose}
+                  sx={{ pl: 2 }} // Add left padding to indent subheadings
+                >
+                  <ListItemText primary="Contact Us" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={handleMobileMenuClose}
+                  sx={{ pl: 2 }} // Add left padding to indent subheadings
+                >
+                  <ListItemText primary="Help" />
+                </ListItem>
+                {/* ...additional mobile items */}
+              </List>
+            </Drawer>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: { xs: 'row', sm: 'row' },
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            [theme.breakpoints.up('sm')]: {
 
-                <ListItemText primary="Services" />
-              </ListItem>
-              <ListItem button onClick={handleMobileMenuClose}>
-                {/* <ListItemText primary="Sell Product" /> */}
-              </ListItem>
-              <ListItem button onClick={handleMobileMenuClose}>
-                {/* <ListItemText primary="Products Available" /> */}
-              </ListItem>
-              {/* ...additional mobile items */}
-            </List>
-
-          </Drawer>
-          <Box sx={{ ml: 12 }}>
+              ml: 'auto',
+              mr: 5
+            },
+          }}>
             <NavBarLinks />
           </Box>
         </Toolbar>
